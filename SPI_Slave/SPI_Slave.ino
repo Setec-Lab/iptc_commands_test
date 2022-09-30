@@ -53,5 +53,6 @@ void loop (void)
     }else{
       Serial.println("Bye");
     }
+    delay(2000);
     
 }  // end of loop
