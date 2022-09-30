@@ -3,6 +3,9 @@
 char buf [100];
 volatile byte pos;
 volatile boolean process_it;
+char prev; 
+bool command;
+bool hello;
 
 void setup (void)
 {
@@ -26,28 +29,29 @@ void setup (void)
 ISR (SPI_STC_vect)
 {
 byte c = SPDR;
-  
-  // add to buffer if room
-  if (pos < sizeof buf)
-    {
-    buf [pos++] = c;
-    
-    // example: newline means time to process buffer
-    if (c == '\n')
-      process_it = true;
-      
-    }  // end of room available
+
+  if(command){
+    if(c==0x01){
+      hello = true; 
+    }else{
+      hello = false;
+    }
+  }
+  if(c==0x00 & prev==0xFF){
+    command = true;
+  }
+
+  prev = c;
 }
 
 // main loop - wait for flag set in interrupt routine
 void loop (void)
 {
-  if (process_it)
+  if (hello)
     {
-    buf [pos] = 0;  
-    Serial.println (buf);
-    pos = 0;
-    process_it = false;
-    }  // end of flag set
+    Serial.println("Hello");
+    }else{
+      Serial.println("Bye");
+    }
     
 }  // end of loop
