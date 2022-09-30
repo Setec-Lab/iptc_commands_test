@@ -21,7 +21,7 @@ void loop (void)
   uint8_t footer[2] = {0xFF, 0x00};
 
 
-  Serial.print("Presione h para \"Hello\" y b para \"Bye\"")
+  Serial.print("Presione h para \"Hello\" y b para \"Bye\"");
 
   val = Serial.read();
   switch (val){
@@ -34,8 +34,6 @@ void loop (void)
   }
 
   char c;
-
-  print()
 
   // enable Slave Select
   digitalWrite(SS, LOW);    // SS is pin 10
