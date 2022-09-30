@@ -21,15 +21,17 @@ void loop (void)
   uint8_t footer[2] = {0xFF, 0x00};
 
 
-  Serial.print("Presione h para \"Hello\" y b para \"Bye\"");
+  Serial.println("Presione h para \"Hello\" y b para \"Bye\"");
 
   val = Serial.read();
   switch (val){
     case 0x68:
       hello = true;
+      Serial.println("Hello");
       break;
     case 0x62:
       hello = false;
+      Serial.println("Bye");
       break;
   }
 
